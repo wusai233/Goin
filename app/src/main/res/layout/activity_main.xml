@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:background="#9E9E9E"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp">
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/tab_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/alarm_clock"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector_weixing"
+            android:button="@null"
+            android:gravity="center"
+            android:text="闹钟"
+            android:textColor="@drawable/tab_selector_tv_color"
+            android:textSize="15dp" />
+
+        <RadioButton
+            android:id="@+id/inquire"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector_weixing"
+            android:button="@null"
+            android:gravity="center"
+            android:text="公交查询"
+            android:textColor="@drawable/tab_selector_tv_color"
+            android:textSize="15dp" />
+
+        <RadioButton
+            android:id="@+id/collect"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector_weixing"
+            android:button="@null"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="@drawable/tab_selector_tv_color"
+            android:textSize="15dp" />
+    </RadioGroup>
+
+</LinearLayout>
