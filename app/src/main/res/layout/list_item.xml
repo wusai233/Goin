@@ -17,11 +17,18 @@
            android:layout_height="wrap_content">
 
            <RadioButton
+               android:checked="false"
                android:id="@+id/radio_btn_data"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="center_vertical"
                android:visibility="visible" />
+           <RadioButton
+               android:checked="false"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_vertical"
+               android:visibility="gone" />
            <TextView
                android:id="@+id/clock_text"
                android:layout_width="wrap_content"
@@ -45,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/img_btn_false" />
+            android:src="@drawable/img_btn_ture" />
 
     </RelativeLayout>
 

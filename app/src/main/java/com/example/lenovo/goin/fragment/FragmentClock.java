@@ -32,15 +32,16 @@ public class FragmentClock extends Fragment implements View.OnClickListener {
     private List mData;
     private SimpleAdapter mAdapter;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.page_alarm_clock, null);
 
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         id_add_clock = (Button) view.findViewById(R.id.id_add_clock);
         id_delete_clock = (Button) view.findViewById(R.id.id_delete_clock);
-
-        id_add_clock.setOnClickListener(this);
-        id_delete_clock.setOnClickListener(this);
 
         inData();
 
@@ -59,27 +60,7 @@ public class FragmentClock extends Fragment implements View.OnClickListener {
         }
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.page_alarm_clock, null);
-
-    }
-
     @Override
     public void onClick(View v) {
-        switch (getId()) {
-            case R.id.id_add_clock:
-
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.main_content,new FragmentAddClock());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
-                break;
-            case R.id.id_delete_clock:
-
-                break;
-        }
     }
 }
