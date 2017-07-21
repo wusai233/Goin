@@ -16,19 +16,16 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content">
 
-           <RadioButton
-               android:checked="false"
+           <ToggleButton
+               android:background="@drawable/setting_tentn_bg"
+               android:textOn=""
+               android:textOff=""
+               android:text=""
                android:id="@+id/radio_btn_data"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+               android:layout_width="20dp"
+               android:layout_height="20dp"
                android:layout_gravity="center_vertical"
                android:visibility="visible" />
-           <RadioButton
-               android:checked="false"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_vertical"
-               android:visibility="gone" />
            <TextView
                android:id="@+id/clock_text"
                android:layout_width="wrap_content"
@@ -40,19 +37,23 @@
        </LinearLayout>
 
         <TextView
+            android:id="@+id/id_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:text="周一" />
 
-        <ImageView
+        <ToggleButton
+            android:textOn=""
+            android:textOff=""
+            android:text=""
+            android:background="@drawable/setting_tenbtn_cloose_button"
             android:id="@+id/img_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/img_btn_ture" />
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 

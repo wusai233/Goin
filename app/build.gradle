@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "com.example.lenovo.wusai"
+        applicationId "com.example.lenovo.wusaiGoin"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -15,6 +15,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    /**
+     * 目前 Android Studio不支持自动添加 .so文件（Eclipse是支持的），所以我们需要手动加载libs下的.so的动态库
+     */
+    sourceSets {
+        main() {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -28,4 +36,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile files('jniLibs/BaiduLBS_Android.jar')
 }

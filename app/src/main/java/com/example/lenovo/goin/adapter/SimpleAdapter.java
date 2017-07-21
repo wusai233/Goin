@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.lenovo.wusaiGoin.R;
 
@@ -17,86 +18,73 @@ import java.util.List;
 /**
  * Created by lenovo on 2017/7/18.
  */
-
-public class SimpleAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    private LayoutInflater mInflater;
+public class SimpleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private Context mContext;
     private List<Integer> mDatas;
 
     public SimpleAdapter(Context context, List datas) {
         this.mContext = context;
         this.mDatas = datas;
-        mInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.list_item, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater mInflater = LayoutInflater.from(mContext);
+        ViewGroup vItem = (ViewGroup) mInflater.inflate(R.layout.list_item, parent, false);
+        MyViewHolder viewHolder = new MyViewHolder(vItem);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-//        MyViewHolder itemViewHolder = (MyViewHolder) holder;
-//        itemViewHolder.clock_text.setText(mDatas.get(position)+"");
-//        itemViewHolder.img_btn.setOnClickListener((View.OnClickListener) this);
-//        itemViewHolder.radio_btn_data.setOnClickListener((View.OnClickListener) this);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        MyViewHolder itemViewHolder = (MyViewHolder) holder;
+        itemViewHolder.clock_text.setText(mDatas.get(position) + "");
+        itemViewHolder.img_btn.setOnClickListener(this);
+        itemViewHolder.img_btn.setTag(mDatas.get(position));
+        itemViewHolder.radio_btn_data.setOnClickListener(this);
+        itemViewHolder.radio_btn_data.setTag(mDatas.get(position));
+//        itemViewHolder.id_days.setText(mDatas.get(position) + "");
     }
 
     @Override
     public int getItemCount() {
         return mDatas.size();
     }
-}
 
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView clock_text;
+        private ToggleButton img_btn;
+        private ToggleButton radio_btn_data;
+        private TextView id_days;
 
-class MyViewHolder extends RecyclerView.ViewHolder {
-    LayoutInflater mInflater;
-    TextView clock_text;
-    ImageView img_btn;
-    RadioButton radio_btn_data;
-    boolean flag = true;
-    boolean radioFlag = false;
-    final GlobalValue globalValue = new GlobalValue();
-
-    public MyViewHolder(View itemView) {
-        super(itemView);
-        clock_text = (TextView) itemView.findViewById(R.id.clock_text);
-        img_btn = (ImageView) itemView.findViewById(R.id.img_btn);
-        radio_btn_data = (RadioButton) itemView.findViewById(R.id.radio_btn_data);
-
-        img_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (flag == true) {
-                    img_btn.setImageResource(R.drawable.img_btn_false);
-                    flag = false;
-                } else {
-                    img_btn.setImageResource(R.drawable.img_btn_ture);
-                    flag = true;
-                }
-                Log.e("aaaa", "--------------" + 2 + "--------------");
-            }
-        });
-        radio_btn_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isCheck = globalValue.isCheck();
-                if(isCheck)
-                {
-                    if(v==radio_btn_data)radio_btn_data.setChecked(false);
-                }
-                else
-                {
-                    if(v==radio_btn_data)radio_btn_data.setChecked(true);
-                }
-                globalValue.setCheck(!isCheck);
-                Log.e("aaaa", "--------------" + 1 + "--------------");
-            }
-        });
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            clock_text = (TextView) itemView.findViewById(R.id.clock_text);
+            img_btn = (ToggleButton) itemView.findViewById(R.id.img_btn);
+            radio_btn_data = (ToggleButton) itemView.findViewById(R.id.radio_btn_data);
+            id_days = (TextView) itemView.findViewById(R.id.id_days);
+        }
     }
+
+    public interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, int data);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取数据
+            mOnItemClickListener.onItemClick(v, (int) v.getTag());
+        }
+    }
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
     // radioButton 切换状态
     public class GlobalValue {
         public boolean isCheck() {

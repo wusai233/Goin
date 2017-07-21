@@ -1,37 +1,29 @@
 package com.example.lenovo.goin;
 
-import android.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.RadioGroup;
 import com.example.lenovo.goin.fragment.FragmentClock;
 import com.example.lenovo.goin.fragment.FragmengCollect;
 import com.example.lenovo.goin.fragment.FragmentInquire;
 import com.example.lenovo.wusaiGoin.R;
 
-public class MainActivity extends AppCompatActivity {
-    private MainActivity mySelf = this;
-
+public class MainActivity extends AppCompatActivity implements FragmentClock.ChangeFragmentListener {
     private RadioGroup tab_menu;
     Fragment inquire;
     FragmengCollect collect;
     FragmentClock aiarm_clock;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tab_menu = (RadioGroup) findViewById(R.id.tab_menu);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new FragmentClock()).commit();
-
         initView();
     }
-
 
     public void initView() {
         inquire = new FragmentClock();
@@ -63,5 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void changeFragment(Fragment newFragmentm) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, newFragmentm).commit();
     }
 }
